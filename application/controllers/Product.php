@@ -10,8 +10,6 @@ class Product extends CI_Controller {
         $this->load->library('cart');
         // $this->load->helper('session');
     }
-
-
 	public function productView($catId="")
 	{
 		$data['cat'] = $this->Product_model->selectCategory();
