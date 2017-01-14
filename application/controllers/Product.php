@@ -47,7 +47,7 @@ class Product extends CI_Controller {
 	{ 
 		foreach ($this->cart->contents() as $items)
 		{
-			//echo "<pre>";print_r($items);
+			echo "<pre>";print_r($items);
 		}
 		$this->load->view('product/cartView');
 	}
