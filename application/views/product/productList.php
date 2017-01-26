@@ -192,7 +192,7 @@
                 </div>
       				</div>
       				<div class="col-md-6 col-sm-6">
-      					<a href="#" data-toggle="tooltip" title="Add To Cart"><button class="btn-cart1 right" onClick="addToCart('<?php echo $value['product_id'];?>','<?php echo $value['price'];?>','<?php echo $value['name'];?>','<?php echo $value['image'];?>')" id="addToCart"><i class="fa fa-cart-arrow-down"></i>&nbsp;Buy Item</button></a>
+      					<a href="#" data-toggle="tooltip" title="Add To Cart"><button class="btn-cart1 right" onClick="addToCart('<?php echo $value['product_id'];?>','<?php echo $value['price'];?>','<?php echo $value['name'];?>','<?php echo $value['image'];?>','<?php echo $value['meta_title'];?>')" id="addToCart"><i class="fa fa-cart-arrow-down"></i>&nbsp;Buy Item</button></a>
       				</div>
       				
       			</div>
@@ -415,5 +415,5 @@
       <!-- main-content ends here --> 
     </div>
 <?php 
-  $this->load->view('templates/footer')
+  $this->load->view('templates/footer');
 ?>

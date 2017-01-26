@@ -90,10 +90,8 @@
 						 </div>
 						<div class="clear"> </div>
 					  </div>  
-						<input type="button" onclick="loginAction()" value="Login">
-					</form>	
-					 
-					 
+						<input type="button" onclick="loginAction('redirectToHome')" value="Login">
+					</form>
 				</div>
 				</div>
 			  

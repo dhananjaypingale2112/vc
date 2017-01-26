@@ -30,7 +30,7 @@ function display_alert(type,message)
 
     setTimeout(function(){
         $(".alert_msg").html("");       
-    },5000);
+    },3000);
 }
 /**************/
 function isEmail() {
@@ -263,7 +263,7 @@ function registerUser()
     }
 }
 /***************/
-function loginAction()
+function loginAction(redirect)
 {
     var check = 1;
 
@@ -293,30 +293,39 @@ function loginAction()
     }
     else
     {
-    var formData = $("#loginForm").serialize();
-    var path = base_url+"auth/loginAction";
-    $.ajax({
-        type:'POST',
-        url:path,
-        data:formData,
-        success:function(resp)
-        {
-            //alert(resp);
-           if(resp == 1){
-                var msg = 'Login Successfull...!';
-                display_alert('succ',msg);
-                setInterval(function(){
-                    window.location.href = base_url;
-                }, 3000);
-            }
-            else
+        var formData = $("#loginForm").serialize();
+        var path = base_url+"auth/loginAction";
+        $.ajax({
+            type:'POST',
+            url:path,
+            data:formData,
+            success:function(resp)
             {
-                var msg = 'Incorrect Email or Password..!';
-                display_alert('err',msg);
-            }
-        }   
-    });
-}
+               //alert(resp);
+               if(resp == 1){
+                    var msg = 'Login Successfull...!';
+                    display_alert('succ',msg);
+                    if(redirect == 'redirectToHome')
+                        {
+                            setInterval(function(){
+                            window.location.href = base_url;
+                            }, 000);
+                        }
+                    else if(redirect == 'redirectToCheckOut')
+                    {
+                        setInterval(function(){
+                            window.location.href = base_url+'product/checkOut/in';
+                            }, 1000);
+                    }
+                }
+                else
+                {
+                    var msg = 'Incorrect Email or Password..!';
+                    display_alert('err',msg);
+                }
+            }   
+        });
+    }
        
 }
 /*************/
@@ -351,7 +360,6 @@ function verifyUsername()
             {
                 var msg = 'You will receive New password on your email, Please login and Reset your password...!';
                 display_alert('succ',msg);
-
                 setInterval(function(){
                     var path = base_url+"auth/forgotPassOtp/"+resp;
                     window.location.href = path;

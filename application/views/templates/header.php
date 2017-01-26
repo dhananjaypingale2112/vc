@@ -2,7 +2,9 @@
     $customer_id = $this->session->userdata('customer_id');
     $firstname = $this->session->userdata('firstname');
     $this->load->helper('cookie');
-    // print_r(get_cookie('vc_email'));exit;
+    $this->load->library('cart');
+    $totalItems = $this->cart->total_items();
+    //echo "<pre>";print_r($totalItems);exit;
 ?>
 <!doctype html>
 <!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
@@ -104,13 +106,13 @@
               <ul>
               <?php if(!empty($customer_id)):?>
                 <li><a title="Login" href="<?php echo base_url('Auth/myAccount');?>"><span class="fa fa-sign-in"></span>Hi..<?php echo $firstname; ?></a></li>
-                <li><a title="Register Now" href="register.html"><span class="fa fa-cart-arrow-down"></span> view Cart - 0 </a></li>
+                <li><a title="Register Now" href="<?php echo base_url('product/cartView');?>"><span class="fa fa-cart-arrow-down"></span> view Cart - <div id="totalItems" style="float:right"><?php echo $totalItems; ?></a></li>
                 <li><a title="logout Now" href="<?php echo base_url('Auth/logout');?>"><span class="fa fa-user"></span> logout </a></li>
 
               <?php else: ?>
                 <li><a title="Login" href="<?php echo base_url('Auth/loginView');?>"><span class="fa fa-sign-in"></span>Member Login</a></li>
                 <li><a title="Register Now" href="<?php echo base_url('Auth/rgisterView');?>"><span class="fa fa-user"></span> Register </a></li>
-                <li><a title="Register Now" href="<?php echo base_url('product/cartView');?>"><span class="fa fa-cart-arrow-down"></span> view Cart - 0 </a></li>
+                <li><a title="Register Now" href="<?php echo base_url('product/cartView');?>"><span class="fa fa-cart-arrow-down"></span> view Cart - <div id="totalItems" style="float:right"><?php echo $totalItems; ?></div> </a></li>
               <?php endif; ?>
               </ul>
             </div>

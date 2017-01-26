@@ -1,5 +1,8 @@
 <?php 
-  $this->load->view('templates/header')
+  $this->load->view('templates/header');
+  //$total = $this->cart->total();
+  $total = $this->cart->total();
+  //print_r($total);
 ?>
 <div id="main"> 
       <!-- main-content starts here -->
@@ -33,51 +36,37 @@
                                 ?>
                                     <tr>
                                         <td class="product-in-table">
-                                            <img class="img-responsive" src="<?php echo base_url();?>public/images/products/product-low-res.png" alt="">
+                                            <img class="img-responsive" src="<?php echo base_url()."public/images/".$items['image'];?>" alt="">
                                             <div class="product-it-in">
-                                                <h3><?php echo $items['name'] ?></h3>
-                                                <span>Sed aliquam tincidunt tempus</span>
+                                            <?php 
+                                              $name = $items['name'];
+                                              $name = str_replace("comma",",","$name");
+                                              $name = str_replace("leftRound","( ","$name"); 
+                                              $name = str_replace("rightRound"," )","$name");
+                                            ?>
+                                                <h3><?php echo $name; ?></h3>
+                                                <span><?php echo empty($items['desc'])?"":$items['desc']; ?></span>
                                             </div>    
                                         </td>
-                                        <td>$ 160.00</td>
+                                        <td>&#x20B9;<?php echo $items['price'] ?></td>
                                         <td>                                            
                                           <div class="sp-quantity">
-                                              <div class="sp-minus fff ddd">-</div>
+                                              <div class="sp-minus fff ddd" id="" onClick="subTotal('<?php echo $items['id'];?>','<?php echo $items['price'];?>','<?php echo $items['rowid'];?>','minus')">-</div>
                                               <div class="sp-input">
-                                                  <input type="text" class="quntity-input" value="1" />
+                                                  <input type="text" class="quntity-input" id="qty_<?php echo $items['id'];?>" value="<?php echo $items['qty'] ?>" readonly/>
                                               </div>
-                                              <div class="sp-plus fff ddd">+</div>
+                                              <div class="sp-plus fff ddd" id="" onClick="subTotal('<?php echo $items['id'];?>','<?php echo $items['price'];?>','<?php echo $items['rowid'];?>','plus');">+</div>
                                           </div>
                                         </td>
-                                        <td class="shop-red">$ 320.00</td>
+                                        <td class="shop-red"><input type="text" class="totalAmt-input" id="subTotal_<?php echo $items['id'];?>" value="<?php echo $items['subtotal']; ?>" readonly/>
+                                        </td>
                                         <td>
-                                            <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
+                                            <button type="button" class="close"><a href="<?php echo base_url('product/removeCardItem/').$items['rowid'];?>"><span>&times;</span><a><span class="sr-only">Close</span></button>
                                         </td>
                                     </tr>
-                                  <?php endforeach; ?>
-                                    <tr>
-                                        <td class="product-in-table">
-                                            <img class="img-responsive" src="<?php echo base_url();?>public/images/products/product-low-res.png" alt="">
-                                            <div class="product-it-in">
-                                                <h3>Vivamus ligula</h3>
-                                                <span>Sed aliquam tincidunt tempus</span>
-                                            </div>    
-                                        </td>
-                                        <td>$ 160.00</td>
-                                        <td>
-                                           <div class="sp-quantity">
-     <div class="sp-minus fff ddd">-</div>
-    <div class="sp-input">
-        <input type="text" class="quntity-input" value="1" />
-    </div>
-    <div class="sp-plus fff ddd">+</div>
-</div>
-                                        </td>
-                                        <td class="shop-red">$ 320.00</td>
-                                        <td>
-                                            <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                        </td>
-                                    </tr>
+                                  <?php 
+                                    endforeach; 
+                                  ?>
                                   </tbody>
                             </table>
                         </div>
@@ -141,26 +130,25 @@
                              <div class="col-sm-3 col-sm-offset-9">
                                 <ul class="list-inline total-result">
                                     <li>
-                                        <h4>Subtotal:</h4>
+                                        <h4>Total:</h4>
                                         <div class="total-result-in">
-                                            <span>$ 1280.00</span>
+                                            <span><input type="text" class="totalAmt-input" id="total" value="<?php echo $total; ?>" readonly/></span>
                                         </div>    
                                     </li>    
                                     <li>
                                         <h4>Shipping:</h4>
                                         <div class="total-result-in">
-                                            <span class="text-right">- - - -</span>
+                                            <span class="text-right"><input type="text" class="totalAmt-input" id="shippingCharges" value="0" readonly/></span>
                                         </div>
                                     </li>
                                     <li class="divider"></li>
                                     <li class="total-price">
-                                        <h4>Total:</h4>
+                                        <h4>Grand Total:</h4>
                                         <div class="total-result-in">
-                                            <span>$ 1280.00</span>
+                                            <span><input type="text" class="totalAmt-input" id="grandTotal" value="<?php echo $total; ?>" readonly/></span>
                                         </div>
                                     </li>
-                                    <li class="total-price">
-                                        
+                                    <li class="total-price">                                        
                                         <a href="<?php echo base_url('product/checkOut');?>"><button type="button" class="btn-cw" data-toggle="tooltip" title="Checkout">Checkout</button> </a>
                                         <a href="<?php echo base_url('product/productView');?>"><button type="button" class="btn-cw" data-toggle="tooltip" title="Continue Shopping"> Continue Shopping</button> </a>
                                     </li>
@@ -180,5 +168,5 @@
       <!-- main-content ends here --> 
     </div>
 <?php 
-  $this->load->view('templates/footer')
+  $this->load->view('templates/footer');
 ?>

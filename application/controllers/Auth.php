@@ -162,7 +162,7 @@ class Auth extends CI_Controller {
                     'email' => strtolower($email),
                     'password' => sha1($password)
                 );
-
+        //print_r($fields);exit();
         $userExist = $this->helper_model->select('',$tableName, $fields);
         if($userExist){ 
                 $session_data = array(

@@ -116,8 +116,6 @@ document.getElementById(divId).style.display = 'none';
 <script type="text/javascript">
   
   $(function(){
-
-
   $('#marquee-vertical').marquee();  
   $('#marquee-horizontal').marquee({direction:'horizontal', delay:0, timing:50});  
 
@@ -383,15 +381,20 @@ $(document).ready(function(){
 
     var $button = $(this);
     var oldValue = $button.closest('.sp-quantity').find("input.quntity-input").val();
+    //var id = $("#productId").val();
+    //alert(id);
+    //var totalAmt = $("#subTotal_"+id).val();
+
+    //alert(totalAmt);
 
     if ($button.text() == "+") {
         var newVal = parseFloat(oldValue) + 1;
     } else {
         // Don't allow decrementing below zero
-        if (oldValue > 0) {
+        if (oldValue > 1) {
             var newVal = parseFloat(oldValue) - 1;
         } else {
-            newVal = 0;
+            newVal = 1;
         }
     }
     $button.closest('.sp-quantity').find("input.quntity-input").val(newVal);
@@ -433,6 +436,7 @@ $(document).ready(function(){
 <script type="text/javascript" src="<?php echo base_url();?>public/js/jquery.validate.min.js"></script> 
 <script type="text/javascript" src="<?php echo base_url();?>public/js/custom.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>public/js/form-validation.js"></script> 
+<script type="text/javascript" src="<?php echo base_url();?>public/js/registration.js"></script> 
 <script type="text/javascript" src="<?php echo base_url();?>public/js/product.js"></script> 
 </body>
 </html>
